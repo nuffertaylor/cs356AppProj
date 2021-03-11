@@ -165,7 +165,7 @@ Widget createPaymentTextFields(friend) {
                             hintText: "To Whom:",
                             hintStyle: TextStyle(color: Colors.grey)),
                         style: TextStyle(color: Colors.black))),
-            Expanded(flex: 0, child: Text("\$")),
+            Expanded(flex: 0, child: Image.asset('assets/chip.png')),
             Expanded(
                 child: TextField(
                     decoration: InputDecoration(
