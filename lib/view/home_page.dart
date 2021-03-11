@@ -79,23 +79,11 @@ class PieChartWidget extends State<HomePage> {
         )),
         buildButtons(),
         Padding(
-            padding: const EdgeInsets.all(15),
-            child: Align(
-                alignment: Alignment.topCenter,
-                child:
-                    RichText(text: TextSpan(
-                        children: [
-                          WidgetSpan(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                              child: Image.asset('assets/chip.png')
-                            ),
-                          ),
-                          TextSpan(text: userBalance.toString(), style: TextStyle(fontSize: 50, color: Colors.black)),
-                        ]))
-
-
-    ))
+          padding: const EdgeInsets.all(15),
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: prependChipLogoToStr(userBalance.toString(), 50)
+          ))
       ]),
       drawer: MainDrawer(),
     );
@@ -146,4 +134,15 @@ class PieChartWidget extends State<HomePage> {
                       minWidth: maxButtonWidth)))
         ]));
   }
+}
+
+RichText prependChipLogoToStr(String txt, [double size = 12, Color color = Colors.black]) {
+  return RichText(text: TextSpan(
+    children: [
+      WidgetSpan(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 2.0),
+          child: Image.asset('assets/chip.png')),),
+      TextSpan(text: txt, style: TextStyle(fontSize: size, color: color))
+    ]));
 }
