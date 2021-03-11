@@ -136,6 +136,7 @@ class PieChartWidget extends State<HomePage> {
   }
 }
 
+//TODO: figure out how to resize chipLogo to match size of text
 RichText prependChipLogoToStr(String txt, [double size = 12, Color color = Colors.black]) {
   return RichText(text: TextSpan(
     children: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/objects/singletons.dart';
 import 'package:flutter_app/presenter/tally_page_presenter.dart';
+import 'package:flutter_app/view/home_page.dart';
 import '../objects/transaction.dart';
 import '../objects/tally.dart';
 import 'package:date_format/date_format.dart';
@@ -88,7 +89,7 @@ class TallyPageState extends State<TallyPage> {
   Widget buildRow(Transaction t) {
     return ListTile(
         title : Text(formatDate(t.date, [d, '-', M, '-', yy]), style: TextStyle(fontSize: 18)),
-        trailing: Text("₵" + t.amount.toStringAsFixed(2), style: TextStyle(fontSize: 18)),
+        trailing: prependChipLogoToStr(t.amount.toStringAsFixed(2), 12)//Text("₵" + t.amount.toStringAsFixed(2), style: TextStyle(fontSize: 18)),
     );
   }
 
