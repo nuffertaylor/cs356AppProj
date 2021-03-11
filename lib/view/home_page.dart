@@ -82,7 +82,20 @@ class PieChartWidget extends State<HomePage> {
             padding: const EdgeInsets.all(15),
             child: Align(
                 alignment: Alignment.topCenter,
-                child: Text("₵$userBalance", style: TextStyle(fontSize: 50))))
+                child:
+                    RichText(text: TextSpan(
+                        children: [
+                          WidgetSpan(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                              child: Image.asset('assets/chip.png')
+                            ),
+                          ),
+                          TextSpan(text: userBalance.toString(), style: TextStyle(fontSize: 50, color: Colors.black)),
+                        ]))
+
+
+    ))
       ]),
       drawer: MainDrawer(),
     );
