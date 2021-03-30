@@ -76,7 +76,7 @@ class SignInPageState extends State<SignInPage> {
                   minWidth: (MediaQuery.of(context).size.width / 1.5)),
               MaterialButton(
                 onPressed: () {
-                  Services.getUserTallies(1);
+                  Services.apiCall();
                 },
                 child: Text('Test Mock API'),
               )
