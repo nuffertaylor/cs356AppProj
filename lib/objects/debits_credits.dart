@@ -11,14 +11,21 @@ class DebitsCredits {
     return ((value * mod).round().toDouble() / mod);
   }
 
-  Map<String, double> getUserDebitsCredits()
+  //@return list with three entries, 1 is positive debits, 2 is negative credits, and 3 is neutral
+  List<Map<String, double>> getUserDebitsCredits()
   {
-    //TODO: fetch data dynamically
-    return {
-      "House Mortgage": 1,
-      "Company Investments": 1,
-      "MyCHIPs Software Developer": 2,
-      "T-Shirt Sales": 1,
-    };
+    //TODO: dynamic info here:
+    //return the top four weightiest tally relationships
+    //find this by summing up all transactions in all tally relationships (after a lift) and take absolute value
+    //put the fifth in a separate other category with a neutral color to represent all other tallies
+    return [
+      {
+      "Construction Company": 1,
+      "Tom Hanks": 2,},
+      {
+      "Wal-Mart": 2,
+      "Taylor Swift": 1,},
+      {"Other": 1
+    }];
   }
 }

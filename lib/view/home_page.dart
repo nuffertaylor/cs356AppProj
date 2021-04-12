@@ -44,8 +44,12 @@ class PieChartWidget extends State<HomePage> {
   void getUserChartData() {
     if (userInfo.userBalance == null) {
       userInfo.userBalance = presenter.getUserBalance();
-      userInfo.dataMap = presenter.getUserPieChart();
-      userInfo.colorList = presenter.getPieChartColors(userInfo.dataMap);
+      userInfo.dataMap = new Map<String, double>();
+      List<Map<String, double>> listOfChartData = presenter.getUserPieChart();
+      listOfChartData.forEach((map) {
+        userInfo.dataMap.addAll(map);
+      });
+      userInfo.colorList = presenter.getPieChartColors(listOfChartData);
     }
     userBalance = userInfo.userBalance;
     dataMap = userInfo.dataMap;
