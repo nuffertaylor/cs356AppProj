@@ -41,7 +41,7 @@ class Services {
 
   static void apiCall() {
     String ticket =
-        '{"token":"44a90116f65684b038818dbaae819cb1","expires":"2021-04-08T22:53:57.000Z","host":"mychips0","port":54320}';
+        '{"token":"4ebc8ea6f33130544abd4e10d9f44c05","expires":"2021-04-12T21:44:28.000Z","host":"mychips0","port":54320}';
 
     Map<String, dynamic> data = jsonDecode(ticket);
     print(data['host']);

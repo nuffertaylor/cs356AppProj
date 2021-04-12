@@ -228,11 +228,16 @@ class Client {
             // Uint8List encodedMessage = utf8.encode(toSend);
             print(toSend.toString());
             s.write(toSend);
-            // WebSocket webSocket = WebSocket.fromUpgradedSocket(s);
+            print('write sent');
+            // WebSocket webSocket =
+            //     WebSocket.fromUpgradedSocket(s, serverSide: false);
 
             // webSocket.listen((event) {
             //   print('upgraded');
             // });
+
+            // webSocket.add(toSend);
+            print('it was sent');
           } catch (exception) {
             print('error');
             print(exception);

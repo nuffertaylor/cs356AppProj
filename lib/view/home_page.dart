@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/objects/singletons.dart';
+import 'package:flutter_app/view/sign_in_page.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'main_drawer_view.dart';
 import 'tally_search_page.dart';
@@ -15,12 +16,11 @@ class MyChips extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-          primaryColor: Color(0xff53ab77),
-          accentColor: Color(0xfff3a43e),
-          primaryColorDark: Color(0xff5c6060),
-          scaffoldBackgroundColor: Color(0xfff5f6fb),
-          textTheme: GoogleFonts.quicksandTextTheme()
-        ),
+            primaryColor: Color(0xff53ab77),
+            accentColor: Color(0xfff3a43e),
+            primaryColorDark: Color(0xff5c6060),
+            scaffoldBackgroundColor: Color(0xfff5f6fb),
+            textTheme: GoogleFonts.quicksandTextTheme()),
         //TODO: What to do for the user's first time
         home: HomePage());
   }
@@ -92,11 +92,12 @@ class PieChartWidget extends State<HomePage> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                                content: Text("Your total represents the difference between your Credits(C) and your Debits(D)")
-                            );
+                                content: Text(
+                                    "Your total represents the difference between your Credits(C) and your Debits(D)"));
                           });
-                      },
-                    child:Text("₵$userBalance", style: TextStyle(fontSize: 50))))),
+                    },
+                    child: Text("₵$userBalance",
+                        style: TextStyle(fontSize: 50))))),
       ]),
       drawer: MainDrawer(),
     );
@@ -106,46 +107,49 @@ class PieChartWidget extends State<HomePage> {
     var maxButtonWidth = (MediaQuery.of(context).size.width) / 2.25;
     return Container(
         child: Row(children: [
-          Padding(
-              padding: const EdgeInsets.all(10),
-              child: Align(
-                  alignment: Alignment.bottomLeft,
-                  child: MaterialButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) => Scanner()));
-                        },
-                      child: Row(children: [
-                        Text('SCAN', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                        Icon(Icons.qr_code)
-                      ]),
-                      color: Colors.white,
-                      textColor: Theme.of(context).primaryColor,
-                      elevation: 5,
-                      height: 50,
-                      minWidth: maxButtonWidth))),
-          Padding(
-              padding: const EdgeInsets.all(10),
-              child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: MaterialButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                settings: RouteSettings(name: "tally-search-page"),
-                                builder: (BuildContext context) =>
-                                    TallySearchPage(1)));
-                        },
-                      child:
-                      const Text('Pay/Request', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                      color: Colors.white,
-                      textColor: Theme.of(context).primaryColor,
-                      elevation: 5,
-                      height: 50,
-                      minWidth: maxButtonWidth)))
-        ]));
+      Padding(
+          padding: const EdgeInsets.all(10),
+          child: Align(
+              alignment: Alignment.bottomLeft,
+              child: MaterialButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => Scanner()));
+                  },
+                  child: Row(children: [
+                    Text('SCAN',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                    Icon(Icons.qr_code)
+                  ]),
+                  color: Colors.white,
+                  textColor: Theme.of(context).primaryColor,
+                  elevation: 5,
+                  height: 50,
+                  minWidth: maxButtonWidth))),
+      Padding(
+          padding: const EdgeInsets.all(10),
+          child: Align(
+              alignment: Alignment.bottomRight,
+              child: MaterialButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            settings: RouteSettings(name: "tally-search-page"),
+                            builder: (BuildContext context) =>
+                                TallySearchPage(1)));
+                  },
+                  child: const Text('Pay/Request',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  color: Colors.white,
+                  textColor: Theme.of(context).primaryColor,
+                  elevation: 5,
+                  height: 50,
+                  minWidth: maxButtonWidth)))
+    ]));
   }
 }
