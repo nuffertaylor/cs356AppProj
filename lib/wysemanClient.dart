@@ -22,6 +22,13 @@ class WysemanCredential {
   int keyLength;
 }
 
+class WysemanRequestObject {
+  String id = 'list_cmd';
+  String action = 'select';
+  String view = 'mychips.users_v';
+  List<String> fields = ['id', 'std_name', 'peer_endp'];
+}
+
 class WysemanConfig {
   List<String> DBInfo;
   int port;
@@ -70,27 +77,23 @@ class Client {
     String origin = "https://" + this.host + ":" + this.port.toString();
     String endpoint = "/clientinfo";
 
-    print('making call to ${origin + endpoint}');
-    SecurityContext sCon = new SecurityContext();
+    // print('making call to ${origin + endpoint}');
     String current = await _localPath;
     print(current);
     String local = await _localPath;
 
-    try {
-      print('finding file');
-      File f = new File(local + '/spa_ca.crt');
-      print('file found');
-      String contents = await f.readAsString();
-      this.config.CaFile = contents;
-      print('contents there');
-    } catch (e) {
-      print('err');
-      await writeSPA();
-    }
+    // try {
+    //   print('finding file');
+    //   File f = new File(local + '/spa_ca.crt');
+    //   print('file found');
+    //   String contents = await f.readAsString();
+    //   this.config.CaFile = contents;
+    //   print('contents there');
+    // } catch (e) {
+    //   print('err');
+    // }
 
-    sCon.setTrustedCertificates(local + '/spa_ca.crt');
-
-    HttpClient client = new HttpClient(context: sCon);
+    HttpClient client = new HttpClient();
     //magic line that just accepts all cert stuff
     client.badCertificateCallback =
         ((X509Certificate cert, String host, int port) => true);
@@ -101,8 +104,8 @@ class Client {
           .then((HttpClientRequest request) {
         request.headers.add('user-agent', 'Wyseman Websocket Client API');
         request.headers.add('cookie', rand.nextDouble().toString());
-        print('headers set');
-        print(request.headers);
+        // print('headers set');
+        // print(request.headers);
 
         return request.close();
       }).then((HttpClientResponse response) {
@@ -115,8 +118,8 @@ class Client {
               StringToHex.toHexString(js.convert(this.config.DBInfo))
                   .substring(3);
 
-          print('data');
-          print(data);
+          // print('data');
+          // print(data);
 
           message.ip = data['ip'];
           message.cookie = double.parse(data['cookie']);
@@ -148,7 +151,7 @@ class Client {
 
           var keyPair = keyGen.generateKeyPair();
 
-          print('key pairs genereated');
+          // print('key pairs genereated');
 
           final signer = RSASigner(SHA256Digest(), '0609608648016503040201');
           signer.init(
@@ -175,12 +178,12 @@ class Client {
               NOW.hour.toString() +
               ':' +
               NOW.minute.toString() +
-              ':' +
+              '.' +
               (NOW.second + NOW.millisecond).toString() +
               'Z';
 
           String queryString = 'user=$user&db=$db&$authString';
-          String url = 'wss://$host:$port/?$queryString';
+          String url = 'wss://$host:$port?$queryString';
           print('url');
           print(url);
 
@@ -191,23 +194,45 @@ class Client {
           try {
             print('finding file');
             File f = new File(local + '/spa_ca.crt');
-            print('file found');
             String contents = await f.readAsString();
             this.config.CaFile = contents;
             socketHeaders['ca'] = contents;
-            print('contents there');
           } catch (e) {
             print('err');
             await writeSPA();
           }
 
           try {
-            final channel = IOWebSocketChannel.connect(Uri.parse(url),
-                headers: socketHeaders);
-            channel.stream.listen((event) {
-              channel.sink.add('recieved');
-              channel.sink.close(status.goingAway);
+            // final channel = IOWebSocketChannel.connect(Uri.parse(url),
+            //     headers: socketHeaders);
+            // channel.stream.listen((event) {
+            //   channel.sink.add('recieved');
+            //   channel.sink.close(status.goingAway);
+            // });
+            //
+            SecurityContext wsContext = new SecurityContext();
+            AsciiDecoder asciiBoi = new AsciiDecoder();
+            wsContext.setTrustedCertificates(local + '/spa_ca.crt');
+            SecureSocket s = await SecureSocket.connect(this.host, this.port,
+                context: wsContext,
+                onBadCertificate: ((X509Certificate cert) => true));
+
+            s.listen((event) {
+              print('event recived!');
+              print(asciiBoi.convert(event));
             });
+
+            String toSend =
+                "{ id: 'list_cmd', action: 'select', view: 'mychips.users_v', fields: ['id', 'std_name', 'peer_endp']}";
+
+            // Uint8List encodedMessage = utf8.encode(toSend);
+            print(toSend.toString());
+            s.write(toSend);
+            // WebSocket webSocket = WebSocket.fromUpgradedSocket(s);
+
+            // webSocket.listen((event) {
+            //   print('upgraded');
+            // });
           } catch (exception) {
             print('error');
             print(exception);
@@ -257,8 +282,8 @@ Future<File> writeSPA() async {
 
   String dir = await _localPath;
   File f = new File('$dir/spa_ca.crt');
-  f.writeAsString(spaFile);
+  var temp = await f.writeAsString(spaFile);
 
   print('spa written');
-  return f;
+  return temp;
 }
