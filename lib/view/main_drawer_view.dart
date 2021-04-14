@@ -4,6 +4,7 @@ import 'package:flutter_app/presenter/user_info_presenter.dart';
 import 'package:flutter_app/view/pending_page.dart';
 import 'package:flutter_app/view/tally_search_page.dart';
 import 'package:flutter_app/view/user_info_page.dart';
+import 'package:flutter_app/view/wallet_page.dart';
 
 import 'create_tally_page.dart';
 import 'home_page.dart';
@@ -53,7 +54,18 @@ class MainDrawerState extends State<MainDrawer> {
                           builder: (BuildContext context) => HomePage()));
                 }),
             ListTile(
-                title: Text("My Tallies", style: TextStyle(fontWeight: FontWeight.bold)),
+              title: Text("Wallets", style: TextStyle(fontWeight: FontWeight.bold)),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => WalletPage()
+                  )
+                );
+              },
+            ),
+            ListTile(
+                title: Text("Friends", style: TextStyle(fontWeight: FontWeight.bold)),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -61,7 +73,7 @@ class MainDrawerState extends State<MainDrawer> {
                           builder: (BuildContext context) => TallySearchPage(0)));
                 }),
             ListTile(
-                title: Text("Create a New Tally", style: TextStyle(fontWeight: FontWeight.bold)),
+                title: Text("QR Code", style: TextStyle(fontWeight: FontWeight.bold)),
                 onTap: () {
                   Navigator.push(
                       context,
