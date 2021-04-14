@@ -73,8 +73,7 @@ class PendingPageState extends State<PendingPage> {
                       child: usersRequest ? const Text("DELETE") : const Text("DENY")),
                   TextButton(
                     onPressed: () => Navigator.of(context).pop(false),
-                    child: const Text("GO BACK"),
-                  ),
+                    child: const Text("GO BACK"),),
                 ],
               );
             },

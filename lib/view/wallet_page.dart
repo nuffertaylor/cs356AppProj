@@ -46,10 +46,33 @@ class WalletPageState extends State<WalletPage> {
   }
 
   Widget buildRow(Wallet w){
-    return ListTile(
-      leading: Image.asset("assets/" + w.source + "Small.png"),
-      title: Text(w.name),
-      trailing: Text(w.amount.toStringAsFixed(2) + "\t" + w.balanceType),
+    return Dismissible(
+      key: ValueKey(w),
+      onDismissed: (DismissDirection direction) =>
+        setState(()=> walletList.remove(w)),
+      confirmDismiss: (DismissDirection direction) async {
+        return await showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+            AlertDialog(
+              title: Text("Confirm"),
+              content: Text("Are you sure you want to delete " + w.name + "?"),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: Text("DELETE")),
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: const Text("CANCEL"),),
+                ]
+            ),
+        );
+      },
+      child:ListTile(
+        leading: Image.asset("assets/" + w.source + "Small.png"),
+        title: Text(w.name),
+        trailing: Text(w.amount.toStringAsFixed(2) + "\t" + w.balanceType),
+      )
     );
   }
 
