@@ -41,7 +41,7 @@ class MainDrawerState extends State<MainDrawer> {
                                 UserInfoPage(false)));
                   },
                   child: CircleAvatar(
-                      child: new Text(userInfo.account.displayName.substring(0, 1), style: TextStyle(fontSize: 45, fontWeight: FontWeight.w700, color: Color(0xffffffff))),
+                      child: new Text(userInfo.account.displayName.substring(0, 1).toUpperCase(), style: TextStyle(fontSize: 45, fontWeight: FontWeight.w700, color: Color(0xffffffff))),
                       backgroundColor: Color(0xfff3a43e)),
                 ),
             ),

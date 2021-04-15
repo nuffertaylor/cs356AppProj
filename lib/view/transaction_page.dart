@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_app/objects/account.dart';
 import 'package:flutter_app/objects/transaction.dart';
 import 'package:flutter_app/presenter/transaction_presenter.dart';
@@ -15,7 +14,6 @@ const REQUEST = 'REQUEST';
 class TransactionPage extends StatefulWidget {
   final Account transactionPartner;
   final bool fromHome;
-  final String chipSVG = 'assets/chip.svg';
   TransactionPage(this.transactionPartner, this.fromHome, {Key key})
       : super(key: key);
 
@@ -79,9 +77,7 @@ class TransactionPageState extends State<TransactionPage> with SingleTickerProvi
         ),
         Padding(
             padding: EdgeInsets.fromLTRB(20, 8, 6, 8),
-            child: Row(children: [
-              Expanded(flex: 0, child: SvgPicture.asset(widget.chipSVG, height: 16,)),
-              Expanded(
+              child: Expanded(
                   child: TextField(
                       controller: amtController,
                       decoration: InputDecoration(
@@ -90,7 +86,7 @@ class TransactionPageState extends State<TransactionPage> with SingleTickerProvi
                           hintStyle: TextStyle(color: Colors.grey)),
                       style: TextStyle(color: Colors.black),
                       keyboardType: TextInputType.number))
-            ])),
+           ),
         Divider(
           thickness: 2,
           indent: 20,
@@ -126,7 +122,7 @@ class TransactionPageState extends State<TransactionPage> with SingleTickerProvi
             borderRadius: BorderRadius.circular(40), color: Colors.white),
         child: Row(children: [
           CircleAvatar(
-            child: new Text(widget.transactionPartner.displayName.substring(0, 1), style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xffffffff))),
+            child: new Text(widget.transactionPartner.displayName.substring(0, 1).toUpperCase(), style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xffffffff))),
             backgroundColor: Color(0xfff3a43e)),
           Padding(
               padding: EdgeInsets.only(top: 8, right: 24, bottom: 8, left: 16),

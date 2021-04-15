@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/objects/singletons.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'main_drawer_view.dart';
 import 'tally_search_page.dart';
@@ -27,7 +26,6 @@ class MyChips extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  final String chipSVG = 'assets/chip.svg';
   @override
   PieChartWidget createState() => PieChartWidget();
 }
@@ -92,15 +90,14 @@ class PieChartWidget extends State<HomePage> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                              content: Text("Your total represents the difference between your Credits(C) and your Debits(D)")
+                              content: Text("The balance represents the total current \$USD representation of your combined wallet cryptocurrency values.")
                           );
                         });
                   },
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SvgPicture.asset(widget.chipSVG, height: 40),
-                        Text("$userBalance", style: TextStyle(fontSize: 50, fontWeight: FontWeight.w500))
+                        Text("\$$userBalance", style: TextStyle(fontSize: 50, fontWeight: FontWeight.w500))
                       ]),),
         ]),
         ]),

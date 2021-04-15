@@ -125,7 +125,7 @@ class TallySearchPageState extends State<TallySearchPage> {
                           builder: (BuildContext context) =>
                               new CreateTallyPage()));
                 },
-                child: const Text("CREATE NEW TALLY",
+                child: const Text("ADD A NEW FRIEND",
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 color: Colors.white,

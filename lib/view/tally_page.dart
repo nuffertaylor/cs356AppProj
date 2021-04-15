@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_app/objects/singletons.dart';
 import 'package:flutter_app/presenter/tally_page_presenter.dart';
 import '../objects/transaction.dart';
@@ -12,7 +11,6 @@ import 'dart:math';
 class TallyPage extends StatefulWidget {
   final Tally tally;
   TallyPage(this.tally, {Key key}) : super(key: key);
-  final String chipSVG = 'assets/chip.svg';
 
   @override
   TallyPageState createState() => new TallyPageState();
@@ -65,11 +63,11 @@ class TallyPageState extends State<TallyPage> {
             child: Column(
             children: [
               CircleAvatar(
-                child: new Text(widget.tally.friend.displayName.substring(0, 1), style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Color(0xffffffff))),
+                child: new Text(widget.tally.friend.displayName.substring(0, 1).toUpperCase(), style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Color(0xffffffff))),
               backgroundColor: Color(0xfff3a43e),),
               Padding(
-                padding: const EdgeInsets.only(top: 6, bottom: 16),
-                child: Text(widget.tally.friend.displayName,  style: TextStyle(fontSize: 35, color: Color(0xffffffff)))),
+                padding: const EdgeInsets.only(top: 16, bottom: 16),
+                child: Text(widget.tally.friend.displayName,  style: TextStyle(fontSize: 32, color: Color(0xffffffff)))),
               buildButtons()
             ],
       ))));
@@ -102,28 +100,26 @@ class TallyPageState extends State<TallyPage> {
   Widget buildRow(Transaction t) {
     return ListTile(
       title: (t.amount < 0) ? Text("You paid " + widget.tally.friend.displayName, style: TextStyle(fontWeight: FontWeight.w600)) : Text(widget.tally.friend.displayName + " paid You", style: TextStyle(fontWeight: FontWeight.w600)),
-      subtitle: Text(formatDate(t.date, [M, ' ', d, ", ", yyyy]),
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+      subtitle: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+          child: Text(formatDate(t.date, [M, ' ', d, ", ", yyyy]),
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),),
+        Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+                padding: const EdgeInsets.only(top: 6),
+                child: Text(t.message)))]),
         trailing: (t.amount >= 0) ?
-            Row(
-              mainAxisSize: MainAxisSize.min,
-                children: [
-                  SvgPicture.asset(widget.chipSVG, height: 22, color: Color(0xff53AB77),),
-                  Text(t.amount.toStringAsFixed(2), style
+              Text(t.amount.toStringAsFixed(2), style
+                  : TextStyle(fontSize : 20, color
+                  : Color(0xff53AB77), fontWeight : FontWeight.w600))
+
+            : Text(t.amount.toStringAsFixed(2), style
                       : TextStyle(fontSize : 20, color
-                      : Color(0xff53AB77), fontWeight : FontWeight.w600)),
-                ])
-            : Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text("-", style
-                      : TextStyle(fontSize : 20, color
-                      : Color(0xffD54040), fontWeight : FontWeight.w600)),
-                  SvgPicture.asset(widget.chipSVG, height: 22, color: Color(0xffD54040),),
-                  Text(t.amount.toStringAsFixed(2).substring(1), style
-                      : TextStyle(fontSize : 20, color
-                      : Color(0xffD54040), fontWeight : FontWeight.w600)),
-                ])
+                      : Color(0xffD54040), fontWeight : FontWeight.w600))
     );
   }
 
