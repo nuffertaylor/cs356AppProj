@@ -54,7 +54,7 @@ class PieChartWidget extends State<HomePage> {
   Widget build(BuildContext context) {
     getUserChartData();
     return new Scaffold(
-      appBar: AppBar(title: Text("MyCHIPs home")),
+      appBar: AppBar(title: Text("Crypto Home")),
       body: Stack(children: [
         Center(
             child: PieChart(

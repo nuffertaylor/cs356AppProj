@@ -30,7 +30,7 @@ class TallyPageState extends State<TallyPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("Tally History"),
+          title: Text("History with " + widget.tally.friend.displayName),
         ),
         body: buildPage());
   }
@@ -43,7 +43,7 @@ class TallyPageState extends State<TallyPage> {
           padding: const EdgeInsets.only(top: 16, right: 32, bottom:8, left: 32),
           child: Align(
             alignment: Alignment.centerLeft,
-            child: Text("Tally History",
+            child: Text("History",
                     style:
                     TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
                   )
@@ -70,34 +70,6 @@ class TallyPageState extends State<TallyPage> {
               Padding(
                 padding: const EdgeInsets.only(top: 6, bottom: 16),
                 child: Text(widget.tally.friend.displayName,  style: TextStyle(fontSize: 35, color: Color(0xffffffff)))),
-              Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: Text("Tally Balance:",  style: TextStyle(fontSize: 15, color: Color(0xffffffff), fontWeight: FontWeight.w600)),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 6, bottom: 10),
-                child:
-                (widget.tally.balance >= 0) ?
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(widget.chipSVG, height: 28, color: Color(0xff53AB77),),
-                        Text(widget.tally.balance.toString(), style
-                            : TextStyle(fontSize : 30, color
-                            : Color(0xff53AB77), fontWeight : FontWeight.w500)),
-                      ])
-                  : Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(widget.tally.balance.toString().substring(0,1), style
-                          : TextStyle(fontSize : 30, color
-                          : Color(0xffD54040), fontWeight : FontWeight.w500)),
-                      SvgPicture.asset(widget.chipSVG, height: 28, color: Color(0xffD54040),),
-                      Text(widget.tally.balance.toString().substring(1), style
-                          : TextStyle(fontSize : 30, color
-                          : Color(0xffD54040), fontWeight : FontWeight.w500)),
-                    ]),
-              ),
               buildButtons()
             ],
       ))));

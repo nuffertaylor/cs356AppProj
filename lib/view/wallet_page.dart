@@ -108,8 +108,15 @@ class WalletPageState extends State<WalletPage> {
               Padding(padding: EdgeInsets.all(10), child: Image.asset("assets/coinbase.png")),
               // ),
               Padding(padding: EdgeInsets.all(10), child: Image.asset("assets/cryptocom.png")),
-              Padding(padding: EdgeInsets.all(10), child: Align(alignment: Alignment.center, child:
-                Text("Other", style: TextStyle(),)))
+              Align(alignment: Alignment.center, child:
+              TextButton(child:
+                Text("add a different wallet",
+                  style: TextStyle(fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.blueAccent,
+                      decoration: TextDecoration.underline),
+                )
+              ))
             ]
           )
         )

@@ -15,7 +15,7 @@ class CreateTallyPageState extends State<CreateTallyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Create a New Tally")
+        title: Text("Add a Friend")
       ),
       body: Container(
         child: Stack(
@@ -34,7 +34,7 @@ class CreateTallyPageState extends State<CreateTallyPage> {
       padding: const EdgeInsets.all(25),
       child: Align(
         alignment: Alignment.topCenter,
-        child: Text("My Tally Code", style: TextStyle(fontSize: 40))
+        child: Text("My Friend Code", style: TextStyle(fontSize: 40))
       )
     );
   }

@@ -155,11 +155,11 @@ class ScannerState extends State<Scanner> {
     tally.balance = 0;
     //TODO: Check which version of the build this is so we can return a "CupertinoAlertDialog" if on iOS
     return AlertDialog(
-      title: Text('Start a New Tally'),
+      title: Text('Add a New Friend'),
       content: SingleChildScrollView(
         child: ListBody(
           children: <Widget>[
-            Text('Would you like to start a tally with ' + tally.friend.displayName + "?"),
+            Text('Would you like to start add ' + tally.friend.displayName + "?"),
           ],
         ),
       ),
@@ -179,12 +179,10 @@ class ScannerState extends State<Scanner> {
               UserTallies userTallies = UserTallies();
               userTallies.tallyList.add(tally);
               UserTransactions().transactionList[tally.personID] = [];
-              //TODO: Comment this out when succPop works
-              // succPop(context, "Tally with " + tally.friend + " successfully established.");
               transitionToNewTally(tally);
             }
             else
-              errPop(context, "Couldn't create a tally because [INSERT REASON HERE]");
+              errPop(context, "Couldn't create a friend because [INSERT REASON HERE]");
           }),
       ],
     );
