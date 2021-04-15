@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/view/main_drawer_view.dart';
 import 'package:flutter_app/objects/wallet.dart';
+import 'package:flutter_app/objects/singletons.dart';
 
 class WalletPage extends StatefulWidget {
 
@@ -10,7 +11,7 @@ class WalletPage extends StatefulWidget {
 
 class WalletPageState extends State<WalletPage> {
 
-  List<Wallet> walletList = [Wallet("first wallet", "coinbase", 1364.23, "BTC"), Wallet("doge coin only", "cryptocom", 435.11, "DOGE")];
+  List<Wallet> walletList = UserWallets().walletList;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +84,9 @@ class WalletPageState extends State<WalletPage> {
         child: Padding(
             padding: const EdgeInsets.all(15),
             child: MaterialButton(
-                onPressed: () {},
+                onPressed: ()=>
+                  showDialog(context: context, //barrierDismissible: false,
+                      builder: (BuildContext context) => addNewWalletDialog()),
                 child: const Text("ADD A WALLET",
                     style:
                     TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
@@ -92,5 +95,24 @@ class WalletPageState extends State<WalletPage> {
                 elevation: 5,
                 height: 50,
                 minWidth: maxButtonWidth)));
+  }
+
+  Widget addNewWalletDialog() {
+    return AlertDialog(
+      title: Text("Where are you adding a wallet from?"),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              // GestureDetector(
+              //   onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => WebViewPage())), child:
+              Padding(padding: EdgeInsets.all(10), child: Image.asset("assets/coinbase.png")),
+              // ),
+              Padding(padding: EdgeInsets.all(10), child: Image.asset("assets/cryptocom.png")),
+              Padding(padding: EdgeInsets.all(10), child: Align(alignment: Alignment.center, child:
+                Text("Other", style: TextStyle(),)))
+            ]
+          )
+        )
+    );
   }
 }

@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:flutter_app/objects/account.dart';
 import 'package:flutter_app/objects/key_storage.dart';
 import 'package:flutter_app/objects/tally.dart';
+import 'package:flutter_app/objects/wallet.dart';
 import 'package:flutter_app/objects/transaction.dart';
 import 'package:random_date/random_date.dart';
 
@@ -65,6 +66,18 @@ class PendingTransactions {
   }
   factory PendingTransactions() => _instance ?? PendingTransactions._internal();
   List transactionList = <Transaction>[];
+}
+
+class UserWallets {
+  static UserWallets _instance;
+  List<Wallet> walletList = [];
+
+  UserWallets._internal() {
+    _instance = this;
+    walletList.add(Wallet("first wallet", "coinbase", 1364.23, "BTC"));
+    walletList.add(Wallet("doge coin only", "cryptocom", 435.11, "DOGE"));
+  }
+  factory UserWallets()=> _instance ?? UserWallets._internal();
 }
 
 void initiateSingletons() {

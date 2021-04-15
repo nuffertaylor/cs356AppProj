@@ -15,6 +15,7 @@ class PendingPageState extends State<PendingPage> {
   TransactionPresenter presenter = new TransactionPresenter();
   List transactionList = PendingTransactions().transactionList;
   final DateFormat dateFormatter = DateFormat('MMMM d');
+  String curCurrency = "BTC";
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +87,7 @@ class PendingPageState extends State<PendingPage> {
                 t.receiver +
                     " requested " +
                     t.amount.toString() +
-                    " MyCHIPs from " +
+                    " $curCurrency from " +
                     t.sender,
                 style: TextStyle(fontSize: 15))),
             subtitle: Text(dateFormatter.format(t.date)),
