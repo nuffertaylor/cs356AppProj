@@ -113,13 +113,13 @@ class TallyPageState extends State<TallyPage> {
                 padding: const EdgeInsets.only(top: 6),
                 child: Text(t.message)))]),
         trailing: (t.amount >= 0) ?
-              Text(t.amount.toStringAsFixed(2), style
-                  : TextStyle(fontSize : 20, color
-                  : Color(0xff53AB77), fontWeight : FontWeight.w600))
+              Text(t.amount.toStringAsFixed(2) + "\n" + presenter.getRandomTransactionVal(), style
+                  : TextStyle(fontSize : 18, color
+                  : Color(0xff53AB77), fontWeight : FontWeight.w600), textAlign: TextAlign.right,)
 
-            : Text(t.amount.toStringAsFixed(2), style
-                      : TextStyle(fontSize : 20, color
-                      : Color(0xffD54040), fontWeight : FontWeight.w600))
+            : Text(t.amount.toStringAsFixed(2) + "\n" + presenter.getRandomTransactionVal(), style
+                      : TextStyle(fontSize : 18, color
+                      : Color(0xffD54040), fontWeight : FontWeight.w600), textAlign: TextAlign.right)
     );
   }
 
