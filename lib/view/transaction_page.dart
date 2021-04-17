@@ -169,8 +169,8 @@ class TransactionPageState extends State<TransactionPage>
         ),
         Row(children: [
           Padding(
-            padding: EdgeInsets.fromLTRB(20, 8, 6, 8),
-            child: Image.asset(selectedCoin.picture, width: 30, height: 30),
+            padding: EdgeInsets.fromLTRB(20, 8, 0, 8),
+            child: Image.asset(selectedCoin.picture, width: 25, height: 25),
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(10, 8, 6, 8),

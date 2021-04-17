@@ -103,7 +103,7 @@ class PendingPageState extends State<PendingPage> {
 
                 : MaterialButton(
                     onPressed: () {},
-                    child: Text('Cancel', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    child: Text('Remind', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                       color: Colors.white,
                       textColor: Theme.of(context).primaryColor,
                       elevation: 5,
